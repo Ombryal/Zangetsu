@@ -17,31 +17,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "CLA Assistant"
-        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I agree to the Zangetsu CLA v1') || github.event_name == 'pull_request_target'
         uses: contributor-assistant/github-action@v2.6.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
           path-to-signatures: "signatures/version1/cla.json"
-          path-to-document: "https://github.com/Spyou/Zangetsu/blob/main/.github/CLA.md"
+          path-to-document: "https://github.com/Spyou/Zangetsu/blob/main/CLA.md"
 
           branch: "cla-signatures"
 
-          # Skip the CLA check for the repo owner and Weblate (translation bot).
-          allowlist: Spyou,weblate
+          allowlist: Spyou,weblate,dependabot[bot],dependabot-preview[bot],github-actions[bot]
 
           remote-organization-name: ""
           remote-repository-name: ""
 
-          custom-pr-sign-comment: "I have read the CLA Document and I hereby sign the CLA"
+          custom-pr-sign-comment: "I agree to the Zangetsu CLA v1"
 
           custom-notsigned-prcomment: |
             Thank you for your contribution to Zangetsu! 🎉
 
-            Before we can merge this, please read our [Contributor License Agreement](https://github.com/Spyou/Zangetsu/blob/main/.github/CLA.md) and confirm you agree by replying to this PR with the following exact comment:
+            Before we can merge this, please read our [Contributor License Agreement](https://github.com/Spyou/Zangetsu/blob/main/CLA.md) and confirm you agree by replying to this PR with the following exact comment:
 
-            > I have read the CLA Document and I hereby sign the CLA
+            > I agree to the Zangetsu CLA v1
 
           custom-pr-sign-comment-hint: "Copy and paste the sentence above exactly as shown to sign."
 
