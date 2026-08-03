@@ -575,6 +575,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
         ),
+      _SettingsEntry(
+        section: 'Sources',
+        icon: Icons.autorenew_rounded,
+        title: 'Auto-update extensions',
+        subtitle: 'Update installed sources automatically on launch',
+        keywords:
+            'auto update extensions sources plugins automatic upgrade cloudstream aniyomi',
+        trailing: Switch.adaptive(
+          value: sl<PlaybackPrefs>().autoUpdateExtensions,
+          activeThumbColor: AppColors.accent,
+          onChanged: (v) async {
+            await sl<PlaybackPrefs>().setAutoUpdateExtensions(v);
+            if (mounted) setState(() {});
+          },
+        ),
+      ),
       // Playback & downloads
       _SettingsEntry(
         section: 'Playback & downloads',
@@ -1189,6 +1205,12 @@ class _PlaybackSettingsScreenState extends State<PlaybackSettingsScreen> {
     ('auto', 'Auto'),
   ];
 
+  static const List<(String, String)> _closeConfirmOptions = [
+    ('double_back', 'Double back — press back twice to exit'),
+    ('confirm', 'Close confirmation — ask before leaving'),
+    ('direct', 'Close directly — exit immediately'),
+  ];
+
   String _labelFor<T>(List<(T, String)> options, T value, String fallback) {
     for (final (v, label) in options) {
       if (v == value) return label;
@@ -1319,6 +1341,17 @@ class _PlaybackSettingsScreenState extends State<PlaybackSettingsScreen> {
     );
     if (picked == null) return;
     await _prefs.setDoubleTapSeconds(picked);
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _pickCloseConfirmation() async {
+    final picked = await _pick<String>(
+      title: 'Close confirmation',
+      options: _closeConfirmOptions,
+      current: _prefs.closeConfirmation,
+    );
+    if (picked == null) return;
+    await _prefs.setCloseConfirmation(picked);
     if (mounted) setState(() {});
   }
 
@@ -1605,6 +1638,16 @@ class _PlaybackSettingsScreenState extends State<PlaybackSettingsScreen> {
                   await _prefs.setAutoResume(v);
                   if (mounted) setState(() {});
                 },
+              ),
+              SettingsTile(
+                icon: Icons.exit_to_app_outlined,
+                title: 'Close confirmation',
+                subtitle: switch (_prefs.closeConfirmation) {
+                  'confirm' => 'Ask before leaving the player',
+                  'direct' => 'Exit immediately',
+                  _ => 'Press back twice to exit',
+                },
+                onTap: _pickCloseConfirmation,
               ),
               _toggleRow(
                 icon: Icons.skip_next_outlined,

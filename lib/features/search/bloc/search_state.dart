@@ -270,6 +270,33 @@ class SearchState extends Equatable {
       if (_inEcosystem(g.sourceId) && countFor(g) > 0) g,
   ];
 
+  /// Groups in the active ecosystem whose SOURCE returned at least one result,
+  /// IGNORING the content/genre/decade filters. Drives the source-filter chip
+  /// row so it (and the selected chip) stays put even when a filter empties the
+  /// current view — otherwise selecting a chip that yields nothing would hide
+  /// the very chips you'd use to change or clear it.
+  ///
+  /// On the default Best-match sort the chips are ordered best-matching-source
+  /// first — the SAME order as [sortedVisibleGroups] — so the first chip lines
+  /// up with the top row. Ties keep arrival order; explicit sorts / empty query
+  /// keep pure arrival order.
+  List<SourceResultGroup> get sourceChipGroups {
+    final raw = [
+      for (final g in groups)
+        if (_inEcosystem(g.sourceId) && g.items.isNotEmpty) g,
+    ];
+    if (sort != SearchSort.bestMatch || query.trim().isEmpty) return raw;
+    final m = _queryMatch;
+    final score = {for (final g in raw) g.sourceId: _bestScore(g.items, m)};
+    // Decorate with the original (arrival) index so equal scores stay put.
+    final indexed = [for (var i = 0; i < raw.length; i++) (g: raw[i], i: i)];
+    indexed.sort((a, b) {
+      final c = score[b.g.sourceId]!.compareTo(score[a.g.sourceId]!);
+      return c != 0 ? c : a.i.compareTo(b.i);
+    });
+    return [for (final e in indexed) e.g];
+  }
+
   /// Per-source groups, each already filtered + sorted, ordered CloudStream-style
   /// by ARRIVAL: the source that returned results first sits at the top, slower
   /// sources below. This SECTION order is independent of the in-section item
@@ -283,11 +310,39 @@ class SearchState extends Equatable {
       if (items.isEmpty) continue;
       out.add(g.withItems(items));
     }
-    // Stable arrival-order sort: earlier-arrived sources first. List.sort is not
-    // guaranteed stable, so tie-break on arrivalIndex equality is moot here since
-    // each source has a distinct index.
-    out.sort((a, b) => a.arrivalIndex.compareTo(b.arrivalIndex));
+    // Section order. On the default Best-match sort, lead with the source whose
+    // best result most closely matches the query (relevance-first), and fall
+    // back to arrival order for sources that match equally well — so the common
+    // case where several sources all have the exact title keeps today's
+    // fast-source-first feel and nothing reshuffles. Any explicit sort
+    // (Title/Newest/Rating) keeps pure arrival order, unchanged.
+    if (sort == SearchSort.bestMatch && query.trim().isNotEmpty) {
+      // Score each section's best match ONCE, then sort — cheaper than
+      // rescoring inside the comparator.
+      final m = _queryMatch;
+      final score = <String, double>{
+        for (final g in out) g.sourceId: _bestScore(g.items, m),
+      };
+      out.sort((a, b) {
+        final ra = score[a.sourceId]!;
+        final rb = score[b.sourceId]!;
+        if (ra != rb) return rb.compareTo(ra); // better-matching source first
+        return a.arrivalIndex.compareTo(b.arrivalIndex); // else fastest first
+      });
+    } else {
+      out.sort((a, b) => a.arrivalIndex.compareTo(b.arrivalIndex));
+    }
     return out;
+  }
+
+  /// A section's relevance = the best [_scoreItem] among its items.
+  double _bestScore(List<MediaItem> items, ({String q, List<String> tokens}) m) {
+    var best = 0.0;
+    for (final e in items) {
+      final s = _scoreItem(e, m);
+      if (s > best) best = s;
+    }
+    return best;
   }
 
   /// Flat results for the selected source + filters, with the current sort
@@ -303,13 +358,65 @@ class SearchState extends Equatable {
     return _sortItems(base);
   }
 
-  /// Applies [sort] to a list of items. Best-match preserves source order;
+  static final RegExp _wordSplit = RegExp(r'[^a-z0-9]+');
+
+  /// The query normalised for exact/prefix/substring checks plus its word
+  /// tokens — computed ONCE per sort pass and reused across items, instead of
+  /// re-normalising the query for every result on every rebuild.
+  ({String q, List<String> tokens}) get _queryMatch => (
+    q: normalizeTitle(query),
+    tokens: query
+        .toLowerCase()
+        .split(_wordSplit)
+        .where((w) => w.isNotEmpty)
+        .toList(),
+  );
+
+  /// Relevance of [item] to a precomputed query match [m], 0–100 (higher =
+  /// better). Scores against BOTH the source title and the English title and
+  /// keeps the best: exact match wins, then prefix, then substring, then the
+  /// fraction of query words present. An empty (e.g. non-Latin) query scores 0,
+  /// so nothing reshuffles.
+  double _scoreItem(MediaItem item, ({String q, List<String> tokens}) m) {
+    if (m.q.isEmpty) return 0;
+    double scoreOf(String? cand) {
+      if (cand == null) return 0;
+      final t = normalizeTitle(cand);
+      if (t.isEmpty) return 0;
+      if (t == m.q) return 100; // exact
+      if (t.startsWith(m.q)) return 80; // prefix
+      if (t.contains(m.q)) return 60; // substring
+      if (m.tokens.isEmpty) return 0;
+      final matched = m.tokens.where(t.contains).length;
+      if (matched == m.tokens.length) return 40; // all words present
+      return matched / m.tokens.length * 30; // partial word overlap
+    }
+
+    final a = scoreOf(item.title);
+    final b = scoreOf(item.englishTitle);
+    return a > b ? a : b;
+  }
+
+  /// Applies [sort] to a list of items. Best-match ranks by query relevance;
   /// newest/rating fall back to title order for items lacking the data so the
   /// list stays stable rather than reshuffling unparseable items to the bottom.
   List<MediaItem> _sortItems(List<MediaItem> items) {
     switch (sort) {
       case SearchSort.bestMatch:
-        return items;
+        // Rank by how well each title matches the query, keeping the source's
+        // own order on ties (source order is itself a relevance signal). An
+        // empty query leaves the list untouched.
+        if (query.trim().isEmpty) return items;
+        final m = _queryMatch;
+        final scored = [
+          for (var i = 0; i < items.length; i++)
+            (item: items[i], index: i, score: _scoreItem(items[i], m)),
+        ];
+        scored.sort((a, b) {
+          final c = b.score.compareTo(a.score);
+          return c != 0 ? c : a.index.compareTo(b.index);
+        });
+        return [for (final s in scored) s.item];
       case SearchSort.titleAsc:
         return items..sort(
           (a, b) => a.title.toLowerCase().compareTo(b.title.toLowerCase()),

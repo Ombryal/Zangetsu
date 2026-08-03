@@ -130,6 +130,31 @@ class PlaybackPrefs {
   bool get autoResume => _box.get('autoResume', defaultValue: true) as bool;
   Future<void> setAutoResume(bool value) => _box.put('autoResume', value);
 
+  /// How closing the player is guarded against accidental exits:
+  ///  • 'double_back' = first back shows a "press back again" hint, second back
+  ///    within 2s exits. DEFAULT.
+  ///  • 'confirm'     = an "Are you sure?" dialog before leaving.
+  ///  • 'direct'      = leave immediately (legacy behaviour, no guard).
+  String get closeConfirmation =>
+      _box.get('closeConfirmation', defaultValue: 'double_back') as String;
+  Future<void> setCloseConfirmation(String value) =>
+      _box.put('closeConfirmation', value);
+
+  /// Whether installed extensions (Zangetsu / CloudStream / Aniyomi) auto-update
+  /// in the background on launch, throttled to ~once a day. Off by default —
+  /// updates otherwise happen only when the user taps Update in Sources. A
+  /// failed update always leaves the working version in place.
+  bool get autoUpdateExtensions =>
+      _box.get('autoUpdateExtensions', defaultValue: false) as bool;
+  Future<void> setAutoUpdateExtensions(bool value) =>
+      _box.put('autoUpdateExtensions', value);
+
+  /// Epoch millis of the last background extension-update pass (throttle gate).
+  int get lastExtensionUpdateMs =>
+      (_box.get('lastExtensionUpdateMs', defaultValue: 0) as num).toInt();
+  Future<void> setLastExtensionUpdateMs(int value) =>
+      _box.put('lastExtensionUpdateMs', value);
+
   /// Whether vertical swipe gestures in the player adjust brightness (left half)
   /// and volume (right half), MX/Netflix-style.
   bool get gestureControls =>
