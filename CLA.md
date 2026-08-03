@@ -1,123 +1,229 @@
 # Contributor License Agreement (CLA) for Zangetsu
 
-**Last Updated: August 3, 2026**
+**Last Updated: August 4, 2026**
 
-Thanks for wanting to contribute to Zangetsu! To keep the project on solid legal footing — and to make sure that neither Contributors' code nor anyone else's use of the project down the line creates liability for **Spyou** — we ask contributors to agree to the following before we merge their work.
+This Contributor License Agreement ("CLA") is between **Spyou** and each person or organization that submits a Contribution to the Zangetsu project.
 
----
-
-## TL;DR
-
-- You keep ownership of your code.
-- You give Spyou a license to use, modify, and distribute your contribution as part of Zangetsu, under Zangetsu's chosen license (GNU GPLv3, with additional terms — see `LICENSE`).
-- You confirm it's actually your work and doesn't infringe anyone else's rights.
-- Your contribution is provided "as is" — no warranties, no liability.
-- You agree that Spyou isn't responsible for what other people do with Zangetsu once it's out in the world — that's covered by the project's license, not by you or Spyou personally.
-- If your Contribution causes a legal problem (stolen code, infringement, etc.), that's on you, not Spyou.
+This CLA is intended to protect the Project, its maintainers, its users, and the integrity of the codebase, while allowing Contributors to retain ownership of their own work.
 
 ---
 
 ## 1. Definitions
 
-- **"Contribution"** – any code, documentation, art, translations, bug fixes, provider/extractor modules, or other work you submit to the Zangetsu project (via pull request, patch, issue, or similar).
-- **"Project"** – the Zangetsu software and its repositories, maintained by Spyou, distributed under the GNU General Public License v3, with additional terms under GPLv3 Section 7 (see `LICENSE`).
-- **"You"** – the person (or organization, if submitting on their behalf) making the Contribution.
+- **"Project"** means Zangetsu and any official repositories, releases, documentation, build systems, assets, and related project infrastructure maintained by Spyou.
+- **"Contributor"** means any individual or organization submitting a Contribution.
+- **"You"** means the Contributor.
+- **"Contribution"** means any code, documentation, translations, artwork, design assets, bug fixes, patches, provider modules, extractor modules, configuration files, issue content, suggestions, or other material submitted to the Project in any form.
+- **"Submitted"** means delivered by pull request, patch, issue, message, email, form, or any other contribution channel accepted by the Project.
 
 ---
 
-## 2. License Grant
+## 2. Ownership
 
-By submitting a Contribution, you grant Spyou and the Zangetsu project a **perpetual, worldwide, royalty-free, non-exclusive, irrevocable license** to use, reproduce, modify, distribute, and sublicense your Contribution as part of the Project, under the Project's license (GPLv3 + additional terms) or any future license the Project may adopt.
+You keep ownership of your Contribution.
 
-This license to Spyou is broader than what GPLv3 itself grants downstream users (GPLv3 does not permit sublicensing of the Program itself) — this is a separate grant from you to Spyou specifically, and does not change the license terms under which the Project is distributed to the public.
-
-You keep full ownership and copyright of your Contribution — this isn't a transfer, just a license to use it.
+Nothing in this CLA transfers copyright ownership from you to Spyou or to the Project unless a separate written assignment is signed.
 
 ---
 
-## 3. Patent License
+## 3. License Grant to the Project
 
-If your Contribution includes anything patent-eligible, you grant the same kind of license (worldwide, royalty-free, non-exclusive) for patent claims your Contribution would necessarily infringe, so the Project can be freely used and distributed.
+By submitting a Contribution, you grant Spyou and the Project a perpetual, worldwide, irrevocable, non-exclusive, royalty-free license to use, reproduce, store, host, modify, adapt, translate, merge, publish, distribute, display, perform, and prepare derivative works from your Contribution, solely for the purpose of developing, operating, maintaining, testing, reviewing, documenting, and distributing the Project.
 
-If you sue Spyou or the Project over patents related to your own Contribution, this patent license — and your right to have that Contribution remain part of the Project — ends automatically.
+This license includes the right to:
+- include your Contribution in the Project;
+- modify your Contribution as needed for compatibility, security, maintenance, and quality;
+- distribute your Contribution as part of the Project under the Project’s applicable license terms; and
+- use your Contribution in releases, previews, documentation, changelogs, demos, and repository history.
 
----
-
-## 4. Your Promises
-
-By submitting a Contribution, you confirm that:
-
-- It's your original work, or you have the right to submit it.
-- It doesn't knowingly infringe anyone else's copyright, patent, trademark, or other IP rights.
-- If it includes code from elsewhere (another open-source project, a snippet, AI-generated code, a provider/extractor script scraping a third-party source, etc.), you've clearly noted that and it's under a compatible license.
-- You're not under any confidentiality or employment agreement that would prevent you from submitting it.
-- If you're contributing on behalf of an employer or client, you have their permission to do so, and they're bound by this CLA too.
-- You are of legal age to enter into this agreement in your jurisdiction, or you have permission from a parent or legal guardian to do so.
-
-You're **not** obligated to provide support or maintenance for your Contribution.
+This license does not require you to give up your right to use your own Contribution elsewhere, except where doing so would infringe the rights of others or violate applicable law.
 
 ---
 
-## 5. No Warranty, and No Liability Either Way
+## 4. Patent License
 
-**5.1 Your Contribution is "as is."** You provide it without warranties of any kind, and you're not liable to Spyou or the Project for how it performs, to the extent allowed by law.
+If your Contribution includes patent-eligible subject matter, you grant to Spyou and the Project a perpetual, worldwide, irrevocable, non-exclusive, royalty-free patent license covering only those patent claims that are necessarily infringed by your Contribution alone or by your Contribution as incorporated into the Project.
 
-**5.2 Spyou isn't liable to you either.** Spyou, the Project maintainers, and Zangetsu are not liable for any damages arising from the use, modification, or distribution of your Contribution or the Project as a whole.
-
-**5.3 Indemnification.** If a third party brings a claim against Spyou or the Project because your Contribution infringed their rights, wasn't actually yours to submit, or otherwise breached the promises in Section 4, you agree to indemnify and hold Spyou harmless from that claim, including reasonable legal costs. This only covers claims about *your* Contribution — not claims about the Project generally, other people's contributions, or downstream misuse (see Section 6).
+If you bring a patent claim against Spyou or the Project alleging that your Contribution or its use in the Project infringes your patent rights, then the patent license granted in this CLA for that Contribution ends automatically.
 
 ---
 
-## 6. Downstream Use, Forks, and Misuse
+## 5. Contributor Promises
 
-Zangetsu is open-source software distributed under GPLv3 with additional terms (see `LICENSE`). Once your Contribution becomes part of the Project, it can be used, modified, forked, and redistributed by anyone under those terms — that's the nature of open source, and it's outside Spyou's control.
+By submitting a Contribution, you confirm that, to the best of your knowledge and belief:
 
-**You acknowledge and agree that:**
+1. your Contribution is your original work, or you have the legal right to submit it;
+2. you have not knowingly copied it from a source that you had no right to use;
+3. the Contribution does not knowingly infringe copyright, patent, trademark, trade secret, privacy, or other rights of a third party;
+4. if the Contribution includes third-party code, assets, data, or references, you have clearly identified them and confirmed that the license or permission is compatible with the Project;
+5. you are not violating any employment agreement, confidentiality obligation, client restriction, or other contract by submitting it;
+6. if you are submitting on behalf of an employer, company, client, or organization, you have authority to do so and that entity is bound by this CLA for that Contribution;
+7. you are legally able to enter into this CLA, or you have the permission of a parent or legal guardian if required by applicable law.
 
-- Neither you nor Spyou is responsible for how third parties use, modify, fork, or redistribute the Project after the fact — including any third-party content sources, providers, or extractor modules a fork may add or connect to.
-- Spyou bears no liability for misuse, illegal use, or harmful use of the Project or any fork of it by third parties who are not acting on Spyou's behalf.
-- This CLA governs the relationship between you and Spyou regarding **your Contribution** — it does not, and is not intended to, create any liability on your part (or protect you from liability) for what happens to the Project once it's public. The Project's own warranty disclaimer and liability limitation in `LICENSE` is what governs downstream use, for everyone — including Spyou.
-
----
-
-## 7. Trademarks
-
-This CLA doesn't give you any rights to use the "Zangetsu" name, logo, or Spyou's branding beyond what's needed to credit your contribution. Consistent with the additional terms in `LICENSE`, forks may not use the Zangetsu name or branding to imply endorsement by Spyou without permission, and may not misrepresent themselves as the official Zangetsu project.
+You are not required to maintain, support, debug, update, or continue developing your Contribution after submission.
 
 ---
 
-## 8. Governing Law
+## 6. No Warranty
 
-This agreement is governed by the laws of **India**, without regard to conflict-of-law rules. Disputes will be handled through good-faith discussion first; if that doesn't resolve things, through the courts or arbitration in India.
+Your Contribution is provided **"as is"** and **"as available"**.
 
----
-
-## 9. How to Agree
-
-This CLA is accepted by explicitly confirming it — submitting a pull request alone does not count as agreement. On your first contribution, the CLA Assistant bot will comment asking you to reply with a specific confirmation phrase; posting that reply is what constitutes your acceptance of this CLA. Pull requests from contributors who haven't confirmed will not be merged.
+To the fullest extent permitted by law, you provide no warranties of any kind, express or implied, including warranties of merchantability, fitness for a particular purpose, title, and non-infringement.
 
 ---
 
-## 10. Changes to This CLA
+## 7. Limited Contributor Liability
 
-This CLA may be updated occasionally as the project grows. Updates will be noted in the repo (via `CONTRIBUTING.md` or a pinned issue). Contributions made after an update are covered by the new version; past contributions stay covered by whatever version was in effect when submitted.
+You are responsible only for harm directly caused by fraud, intentional misconduct, knowing infringement, or a material breach of this CLA by you in connection with your own Contribution.
 
----
-
-## 11. General Provisions
-
-**11.1 Entire Agreement.** This CLA, together with the `LICENSE` and `NOTICE.md` it references, is the entire agreement between you and Spyou regarding your Contribution, and supersedes any prior discussion on the subject.
-
-**11.2 Severability.** If any provision of this CLA is found unenforceable, the rest of the CLA remains in effect, and the unenforceable provision is read narrowly to preserve its intent as much as possible.
-
-**11.3 No Waiver.** If Spyou doesn't enforce a provision of this CLA on one occasion, that doesn't waive the right to enforce it later.
-
-**11.4 Assignment.** Spyou may transfer the rights and obligations under this CLA to a successor maintainer or organization if the project changes hands (for example, transferred to a foundation or new lead maintainer) without needing your separate consent, provided the successor is bound by the same terms. You may not assign your own obligations under this CLA without Spyou's consent.
-
-**11.5 Survival.** Sections 2, 3, 4, 5, 6, 7, and this Section 11 survive even if you stop contributing to the project or this CLA is otherwise terminated.
+You are not responsible for:
+- the Project as a whole;
+- other contributors’ work;
+- forks;
+- downstream use;
+- third-party misuse;
+- or actions taken by Spyou or any third party outside the scope of your Contribution.
 
 ---
 
-Thanks again for contributing to Zangetsu. If anything here is unclear, open an issue and ask.
+## 8. Indemnification
 
-**Contact:** [@Spyou](https://github.com/Spyou)
+If a third party brings a claim against Spyou or the Project because your Contribution was not actually yours to submit, knowingly infringed a third party’s rights, or materially breached Section 5, then you agree to indemnify and hold harmless Spyou and the Project only to the extent that the claim is directly caused by your Contribution.
+
+This indemnity is limited to:
+- reasonable, documented legal costs;
+- settlements you approved in writing; or
+- damages finally awarded by a court or arbitrator with proper authority.
+
+This indemnity does not make you responsible for the Project generally, unrelated Project behavior, other people’s contributions, or downstream forks and modifications you did not create or control.
+
+---
+
+## 9. Downstream Use, Forks, and Misuse
+
+Once a Contribution is included in the Project, it may be used, modified, reviewed, merged, distributed, and forked under the Project’s applicable license and project terms.
+
+However:
+- neither you nor Spyou is responsible for how unrelated third parties use or misuse the Project after release;
+- forks do not become official Project releases unless Spyou expressly approves them in writing;
+- use of the Zangetsu name, logo, branding, or official identity is not allowed unless Spyou gives written permission;
+- Spyou may reject, remove, or request changes to any Contribution that does not fit the Project’s standards, security expectations, legal requirements, or code of conduct.
+
+---
+
+## 10. Contributor Freedom and Project Control
+
+Contributors remain free to:
+- use their own Contribution elsewhere, subject to the rights of others and applicable law;
+- reuse their own original work in other projects;
+- publish their own standalone versions of their work outside the Project;
+- keep attribution to themselves for their original authorship.
+
+Contributors do not gain:
+- control over the Project’s release schedule;
+- the right to force a merge;
+- the right to override maintainer decisions;
+- the right to represent a fork as official;
+- or the right to use Project branding without permission.
+
+Spyou retains final authority over:
+- repository direction;
+- release inclusion;
+- contributor access;
+- moderation;
+- review standards;
+- naming; and
+- official Project representation.
+
+---
+
+## 11. Acceptance
+
+A Contribution is not accepted unless the Contributor explicitly agrees to this CLA in the manner requested by the Project.
+
+Submitting a pull request, issue, patch, or message alone does not count as acceptance.
+
+**Bot acceptance line:**  
+Reply to the CLA bot with:
+
+`I agree to the Zangetsu CLA v1`
+
+The Project may require a bot comment, checkbox, signed statement, digital signature, or other explicit confirmation before merging.
+
+---
+
+## 12. Changes to This CLA
+
+Spyou may update this CLA from time to time.
+
+- New Contributions are governed by the version of the CLA in effect at the time they are submitted.
+- Previously submitted Contributions remain governed by the version that applied when they were submitted, unless the Contributor separately agrees in writing to a new version.
+- Material changes should be announced clearly in the repository or in a pinned project notice.
+
+---
+
+## 13. Conduct and Contribution Rules
+
+This CLA does not replace the Project’s code of conduct, security policy, contribution guidelines, moderation rules, or repository rules.
+
+By contributing, you agree that you will not use the Project submission process to:
+- spam,
+- harass,
+- sabotage,
+- deceive,
+- inject malware,
+- submit obviously illegal content,
+- or deliberately disrupt the Project.
+
+Spyou may reject, close, or remove any Contribution or contributor access at any time for repeated failure to follow Project rules.
+
+---
+
+## 14. Copyright and Third-Party Material
+
+If your Contribution contains code, data, text, artwork, or other material from another source, you must clearly disclose that source and confirm the material is licensed or otherwise permitted for use in the Project.
+
+If the Project later discovers that a Contribution contains unauthorized material, Spyou may remove, replace, or reject that Contribution without liability to the Contributor except as required by applicable law.
+
+---
+
+## 15. Trademarks
+
+This CLA does not grant you any right to use the names, logos, marks, or branding of Zangetsu or Spyou except as needed to identify the Project accurately or credit your Contribution.
+
+Forks and derivative projects may not imply endorsement, sponsorship, affiliation, or official status without written permission from Spyou.
+
+---
+
+## 16. Governing Law
+
+This CLA is governed by the laws of **India**, without regard to conflict-of-law rules, unless another governing law is required by a written agreement signed by Spyou.
+
+Any dispute will first be handled through good-faith discussion. Nothing in this section limits any non-waivable rights or obligations under applicable law.
+
+---
+
+## 17. General Provisions
+
+### 17.1 Entire agreement
+This CLA, together with the Project’s LICENSE, NOTICE file, contribution rules, and code of conduct, is the entire agreement between you and Spyou regarding your Contribution.
+
+### 17.2 Severability
+If any part of this CLA is found unenforceable, the rest remains in effect, and the invalid part will be interpreted as narrowly as possible to preserve the intended protection.
+
+### 17.3 No waiver
+If Spyou does not enforce a provision on one occasion, that does not waive the right to enforce it later.
+
+### 17.4 Assignment
+Spyou may transfer the rights and obligations under this CLA to a successor maintainer, foundation, or organization, provided the successor is bound by substantially similar obligations toward Contributors.
+
+### 17.5 Survival
+Sections 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 14, 15, 16, and 17 survive termination, removal, or withdrawal from the Project.
+
+---
+
+## 18. Contact
+
+Questions about this CLA may be raised through the Project issue tracker or by contacting **@Spyou**.
+
+**Thank you for contributing to Zangetsu.**
