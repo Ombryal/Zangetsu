@@ -222,7 +222,17 @@ Sections 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 14, 15, 16, and 17 survive termination,
 
 ---
 
-## 18. Contact
+## 18. Main License and Third-Party Notices
+
+The main Zangetsu repository is licensed under **GNU GPL version 3.0** unless otherwise stated.
+
+Third-party components and their respective licenses are listed in the Project’s NOTICE file, `LICENSE-Apache-2.0.txt`, or other included license notices.
+
+Nothing in this CLA changes or overrides the licensing terms that apply to third-party components already included in the Project.
+
+---
+
+## 19. Contact
 
 Questions about this CLA may be raised through the Project issue tracker or by contacting **@Spyou**.
 
