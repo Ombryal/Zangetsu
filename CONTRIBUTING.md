@@ -6,8 +6,10 @@ First off, thanks for considering contributing to Zangetsu! Whether it's a bug f
 
 - Check [open issues](../../issues) to see if what you want to work on is already being tracked.
 - For anything bigger than a small fix (new features, big refactors, new providers), open an issue first to discuss the approach before writing code — saves everyone time.
-- By submitting a pull request, you agree to our [Contributor License Agreement](.github/CLA.md). Please give it a quick read.
+- By submitting a pull request, you agree to our [Contributor License Agreement](CLA.md). Please give it a quick read.
 - Zangetsu is licensed under **GPLv3 with additional terms** (see [`LICENSE`](LICENSE)) — your contributions will be distributed under those same terms.
+- Using AI tools to help write your Contribution? That's allowed — read [`AI_POLICY.md`](AI_POLICY.md) first for disclosure and quality expectations.
+- Third-party code Zangetsu incorporates (and its licenses) is documented in [`NOTICE.md`](NOTICE.md) — worth a skim if you're touching provider/extractor code.
 
 ## Repo Structure
 
@@ -49,6 +51,7 @@ This repo is the main Zangetsu app (Flutter/Dart, with native `android/` and `io
 - Match the existing code style already in the file you're editing.
 - Add or update tests under `test/` where it makes sense.
 - Update relevant documentation/comments if your change affects behavior.
+- **If your PR adds a new dependency, or incorporates code/assets derived from another project, update [`NOTICE.md`](NOTICE.md) in the same PR.** This isn't optional — PRs that introduce undocumented third-party code will be asked to add the attribution before merging.
 
 ## Code Analysis
 
@@ -93,7 +96,7 @@ Open an issue with:
 ## Adding or Fixing a Provider/Extractor
 
 If you're contributing a provider or extractor:
-- Only submit sources you have the right to interact with — see Section 4 of the [CLA](.github/CLA.md).
+- Only submit sources you have the right to interact with — see Section 5 of the [CLA](CLA.md).
 - Keep provider logic isolated from core app logic where possible.
 - Test that search, browsing, and playback all work end-to-end before submitting.
 - Note any rate limits, region restrictions, or fragility (e.g. sources that change their site structure often) in your PR description.
