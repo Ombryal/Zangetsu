@@ -28,7 +28,7 @@ jobs:
 
           branch: "cla-signatures"
 
-          allowlist: Spyou,weblate,dependabot[bot],dependabot-preview[bot],github-actions[bot]
+          allowlist: Spyou,Ombryal,weblate,dependabot[bot],dependabot-preview[bot],github-actions[bot]
 
           remote-organization-name: ""
           remote-repository-name: ""
