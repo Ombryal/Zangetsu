@@ -247,6 +247,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (mounted) setState(() {});
   }
 
+  Future<void> _pickBatchDownloadStyle() async {
+    final prefs = sl<PlaybackPrefs>();
+    // (id, label, blurb)
+    const options = <(String, String, String)>[
+      (
+        'classic',
+        'Classic',
+        'The full sheet with a per-episode thumbnail grid.',
+      ),
+      ('minimal', 'Minimal', 'A number wheel — pick how many episodes to grab.'),
+    ];
+    final picked = await showModalBottomSheet<String>(
+      context: context,
+      backgroundColor: AppColors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 12, bottom: 8),
+              width: 36,
+              height: 4,
+              decoration: BoxDecoration(
+                color: AppColors.textTertiary.withValues(alpha: 0.5),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text('Batch download style', style: AppText.headline),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 8),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'The sheet shown when you download a whole season. Both '
+                  'download exactly the same — only the picker looks different.',
+                  style: AppText.caption,
+                ),
+              ),
+            ),
+            const Divider(color: AppColors.hairline, height: 1),
+            for (final o in options)
+              ListTile(
+                title: Text(o.$2, style: AppText.body),
+                subtitle: Text(o.$3, style: AppText.caption),
+                trailing: o.$1 == prefs.batchDownloadStyle
+                    ? Icon(Icons.check_rounded, color: AppColors.accent)
+                    : null,
+                onTap: () => Navigator.pop(ctx, o.$1),
+              ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    );
+    if (picked == null) return;
+    await prefs.setBatchDownloadStyle(picked);
+    if (mounted) setState(() {});
+  }
+
   String _activeLabel(String activeId) {
     if (activeId.startsWith('cs:')) {
       return _csManager.get(activeId)?.displayName ?? activeId;
@@ -608,7 +676,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: () => _push(const PlaybackSettingsScreen()),
       ),
       _SettingsEntry(
-        section: 'Playback',
+        section: 'History',
         icon: Icons.history_rounded,
         title: 'History',
         subtitle: 'Shows you\'ve watched',
@@ -676,6 +744,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
         keywords: 'search layout grid list results view interface',
         trailing: _value(sl<SearchPrefs>().layout.label),
         onTap: _pickSearchLayout,
+      ),
+      _SettingsEntry(
+        section: 'Interface',
+        icon: Icons.download_rounded,
+        title: 'Batch download style',
+        subtitle: 'How the multi-episode sheet looks',
+        keywords:
+            'batch download style sheet minimal classic wheel episodes multi',
+        trailing: _value(
+          sl<PlaybackPrefs>().batchDownloadStyle == 'minimal'
+              ? 'Minimal'
+              : 'Classic',
+        ),
+        onTap: _pickBatchDownloadStyle,
       ),
       if (Platform.isAndroid)
         _SettingsEntry(
@@ -902,6 +984,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     'Account & sync',
     'Sources',
     'Playback',
+    'History',
     'Downloads',
     'Interface',
     'Notifications',
@@ -955,15 +1038,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
   List<Widget> _categoryRows(List<_SettingsEntry> entries) {
     final tiles = <Widget>[];
     for (final section in _sectionOrder) {
-      final count = entries.where((e) => e.section == section).length;
-      if (count == 0) continue;
+      final items = entries.where((e) => e.section == section).toList();
+      if (items.isEmpty) continue;
       tiles.add(
         SettingsTile(
           icon: _sectionIcon(section),
           title: section,
           subtitle: _sectionSummary(section),
           iconAccent: tiles.isEmpty, // accent the lead row
-          onTap: () => _settingsCubit.open(section),
+          // A section with a single destination (Playback, History,
+          // Notifications) opens it directly — no redundant one-row sub-page.
+          onTap: items.length == 1
+              ? items.first.onTap
+              : () => _settingsCubit.open(section),
         ),
       );
     }
@@ -1013,6 +1100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     'Account & sync' => Icons.person_outline_rounded,
     'Sources' => Icons.dns_rounded,
     'Playback' => Icons.play_circle_outline_rounded,
+    'History' => Icons.history_rounded,
     'Downloads' => Icons.download_outlined,
     'Interface' => Icons.tune_rounded,
     'Notifications' => Icons.notifications_none_rounded,
@@ -1024,7 +1112,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _sectionSummary(String section) => switch (section) {
     'Account & sync' => 'Sign in, trackers, Discord, backup',
     'Sources' => 'Providers, active source, updates',
-    'Playback' => 'Quality, autoplay, speed, history',
+    'Playback' => 'Quality, autoplay, speed',
+    'History' => 'Shows you\'ve watched',
     'Downloads' => 'Downloads, storage, torrents',
     'Interface' => 'Appearance, search layout',
     'Notifications' => 'New-episode alerts',
@@ -1806,6 +1895,16 @@ class _PlaybackSettingsScreenState extends State<PlaybackSettingsScreen> {
                 value: _prefs.autoResume,
                 onChanged: (v) async {
                   await _prefs.setAutoResume(v);
+                  if (mounted) setState(() {});
+                },
+              ),
+              _toggleRow(
+                icon: Icons.playlist_add_check_rounded,
+                title: 'Auto-add to My List',
+                subtitle: 'Add a title to My List when you start watching it',
+                value: _prefs.autoAddToMyList,
+                onChanged: (v) async {
+                  await _prefs.setAutoAddToMyList(v);
                   if (mounted) setState(() {});
                 },
               ),

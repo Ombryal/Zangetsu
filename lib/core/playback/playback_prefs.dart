@@ -130,6 +130,14 @@ class PlaybackPrefs {
   bool get autoResume => _box.get('autoResume', defaultValue: true) as bool;
   Future<void> setAutoResume(bool value) => _box.put('autoResume', value);
 
+  /// Auto-add a title to My List (as "Watching") the first time you start
+  /// watching it — mirrors the tracker auto-scrobble. Off by default so My List
+  /// stays a manually-curated list; trackers scrobble regardless of this.
+  bool get autoAddToMyList =>
+      _box.get('autoAddToMyList', defaultValue: false) as bool;
+  Future<void> setAutoAddToMyList(bool value) =>
+      _box.put('autoAddToMyList', value);
+
   /// How closing the player is guarded against accidental exits:
   ///  • 'double_back' = first back shows a "press back again" hint, second back
   ///    within 2s exits. DEFAULT.
@@ -148,6 +156,17 @@ class PlaybackPrefs {
       _box.get('autoUpdateExtensions', defaultValue: false) as bool;
   Future<void> setAutoUpdateExtensions(bool value) =>
       _box.put('autoUpdateExtensions', value);
+
+  /// Style of the batch-download sheet (detail → Download on a multi-episode
+  /// title):
+  ///  • 'classic' = the full sheet with a per-episode thumbnail grid. DEFAULT.
+  ///  • 'minimal' = a number-wheel "how many episodes" picker with the
+  ///    sub/dub · season · quality controls tucked into one line.
+  /// Both return the exact same selection, so the download itself is identical.
+  String get batchDownloadStyle =>
+      _box.get('batchDownloadStyle', defaultValue: 'classic') as String;
+  Future<void> setBatchDownloadStyle(String value) =>
+      _box.put('batchDownloadStyle', value);
 
   /// Epoch millis of the last background extension-update pass (throttle gate).
   int get lastExtensionUpdateMs =>
