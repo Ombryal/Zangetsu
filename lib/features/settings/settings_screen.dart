@@ -717,6 +717,133 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ),
   );
 
+  Widget _supportFooter() {
+    Future<void> open(String url) async {
+      final uri = Uri.parse(url);
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+    }
+
+    Widget socialIcon({
+      required IconData icon,
+      required String label,
+      required String url,
+    }) {
+      return Material(
+        color: AppColors.surface2,
+        shape: const CircleBorder(),
+        child: InkWell(
+          customBorder: const CircleBorder(),
+          onTap: () => open(url),
+          child: SizedBox(
+            width: 54,
+            height: 54,
+            child: Tooltip(
+              message: label,
+              child: Icon(
+                icon,
+                color: AppColors.textSecondary,
+                size: 26,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 34, 20, 10),
+      child: Column(
+        children: [
+          Text(
+            "Want to support $kAppName's Maintainer?",
+            style: AppText.headline.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w800,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Consider Donating',
+            style: AppText.headline.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w800,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 22),
+          OutlinedButton.icon(
+            onPressed: () => _push(const DonateScreen()),
+            icon: const Icon(Icons.favorite_outline_rounded),
+            label: const Text(
+              'S P O N S O R',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                letterSpacing: 5,
+              ),
+            ),
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(0, 72),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              foregroundColor: AppColors.accent,
+              backgroundColor: AppColors.surface2,
+              side: BorderSide(
+                color: AppColors.textSecondary.withValues(alpha: 0.75),
+                width: 2.5,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+            ),
+          ),
+          const SizedBox(height: 22),
+          Text(
+            'No donation goal atm',
+            style: AppText.body.copyWith(
+              color: AppColors.textTertiary,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 22),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              socialIcon(
+                icon: Icons.discord,
+                label: 'Discord',
+                url: kDiscordInviteUrl,
+              ),
+              const SizedBox(width: 26),
+              socialIcon(
+                icon: Icons.code_rounded,
+                label: 'GitHub',
+                url: 'https://github.com/Spyou/Zangetsu',
+              ),
+              const SizedBox(width: 26),
+              socialIcon(
+                icon: Icons.send_rounded,
+                label: 'Telegram',
+                url: 'https://t.me/+9mQlsdvDlo83Mjk1',
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Text(
+            'Version $kAppVersion',
+            style: AppText.body.copyWith(
+              color: AppColors.textTertiary,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (sl<AppMode>().isTv) return const SettingsScreenTv();
@@ -1177,7 +1304,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 // Browse view: account row + one tappable row per section.
                 children
                   ..add(_accountCard(context))
-                  ..addAll(_categoryRows(entries));
+                  ..addAll(_categoryRows(entries))
+                  ..add(_supportFooter());
               } else {
                 // Search cuts across every section (unchanged behaviour).
                 children.addAll(_buildSettingsList(entries, query));
