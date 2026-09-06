@@ -1033,6 +1033,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get font => 'Police';
 
   @override
+  String get addFont => 'Ajouter une police';
+
+  @override
+  String get couldntAddFont => 'Impossible d\'ajouter cette police';
+
+  @override
   String get theme => 'Thème';
 
   @override

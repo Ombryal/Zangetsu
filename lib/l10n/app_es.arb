@@ -402,6 +402,8 @@
 	"tapZones": "Zonas táctiles",
 	"whatTappingEachPartOfThePageDoes": "Qué hace tocar cada parte de la página",
 	"font": "Fuente",
+	"addFont": "Añadir fuente",
+	"couldntAddFont": "No se pudo añadir esa fuente",
 	"theme": "Tema",
 	"fontSize": "Tamaño de fuente",
 	"lineHeight": "Interlineado",

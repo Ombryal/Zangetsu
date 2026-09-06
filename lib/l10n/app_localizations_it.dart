@@ -1031,6 +1031,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get font => 'Carattere';
 
   @override
+  String get addFont => 'Aggiungi carattere';
+
+  @override
+  String get couldntAddFont => 'Impossibile aggiungere quel carattere';
+
+  @override
   String get theme => 'Tema';
 
   @override

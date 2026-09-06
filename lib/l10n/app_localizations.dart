@@ -1975,6 +1975,18 @@ abstract class AppLocalizations {
   /// **'Font'**
   String get font;
 
+  /// No description provided for @addFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Add font'**
+  String get addFont;
+
+  /// No description provided for @couldntAddFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t add that font'**
+  String get couldntAddFont;
+
   /// No description provided for @theme.
   ///
   /// In en, this message translates to:

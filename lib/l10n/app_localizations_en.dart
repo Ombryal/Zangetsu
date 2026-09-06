@@ -1016,6 +1016,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get font => 'Font';
 
   @override
+  String get addFont => 'Add font';
+
+  @override
+  String get couldntAddFont => 'Couldn\'t add that font';
+
+  @override
   String get theme => 'Theme';
 
   @override

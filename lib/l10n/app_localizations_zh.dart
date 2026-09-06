@@ -995,6 +995,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get font => '字体';
 
   @override
+  String get addFont => '添加字体';
+
+  @override
+  String get couldntAddFont => '无法添加该字体';
+
+  @override
   String get theme => '主题';
 
   @override
@@ -5921,6 +5927,12 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get font => '字型';
+
+  @override
+  String get addFont => '新增字型';
+
+  @override
+  String get couldntAddFont => '無法新增該字型';
 
   @override
   String get theme => '主題';

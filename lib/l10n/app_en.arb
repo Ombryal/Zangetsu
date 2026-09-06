@@ -402,6 +402,8 @@
 	"tapZones": "Tap zones",
 	"whatTappingEachPartOfThePageDoes": "What tapping each part of the page does",
 	"font": "Font",
+	"addFont": "Add font",
+	"couldntAddFont": "Couldn't add that font",
 	"theme": "Theme",
 	"fontSize": "Font size",
 	"lineHeight": "Line height",

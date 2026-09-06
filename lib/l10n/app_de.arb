@@ -402,6 +402,8 @@
 	"tapZones": "Tippzonen",
 	"whatTappingEachPartOfThePageDoes": "Was ein Tipp auf jeden Bereich der Seite macht",
 	"font": "Schrift",
+	"addFont": "Schrift hinzufügen",
+	"couldntAddFont": "Schrift konnte nicht hinzugefügt werden",
 	"theme": "Design",
 	"fontSize": "Schriftgröße",
 	"lineHeight": "Zeilenhöhe",

@@ -402,6 +402,8 @@
 	"tapZones": "Zones de tap",
 	"whatTappingEachPartOfThePageDoes": "Ce que fait un tap sur chaque zone de la page",
 	"font": "Police",
+	"addFont": "Ajouter une police",
+	"couldntAddFont": "Impossible d'ajouter cette police",
 	"theme": "Thème",
 	"fontSize": "Taille de police",
 	"lineHeight": "Interligne",

@@ -402,6 +402,8 @@
 	"tapZones": "タップ領域",
 	"whatTappingEachPartOfThePageDoes": "ページの各部分をタップしたときの動作",
 	"font": "フォント",
+	"addFont": "フォントを追加",
+	"couldntAddFont": "そのフォントを追加できませんでした",
 	"theme": "テーマ",
 	"fontSize": "文字サイズ",
 	"lineHeight": "行間",

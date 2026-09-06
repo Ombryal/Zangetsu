@@ -1002,6 +1002,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get font => 'フォント';
 
   @override
+  String get addFont => 'フォントを追加';
+
+  @override
+  String get couldntAddFont => 'そのフォントを追加できませんでした';
+
+  @override
   String get theme => 'テーマ';
 
   @override

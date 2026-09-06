@@ -402,6 +402,8 @@
 	"tapZones": "点按区域",
 	"whatTappingEachPartOfThePageDoes": "点击页面各区域时的作用",
 	"font": "字体",
+	"addFont": "添加字体",
+	"couldntAddFont": "无法添加该字体",
 	"theme": "主题",
 	"fontSize": "字号",
 	"lineHeight": "行高",
