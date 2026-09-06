@@ -1,7 +1,6 @@
 // About: version, updates, support and the developer credits.
 part of 'settings_screen.dart';
 
-
 // ---------------------------------------------------------------------------
 // About
 // ---------------------------------------------------------------------------
@@ -14,11 +13,6 @@ class AboutSettingsScreen extends StatefulWidget {
 }
 
 class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
-  static const String _websiteUrl = 'https://zangetsu.online';
-  static const String _telegramUrl = 'https://t.me/+9mQlsdvDlo83Mjk1';
-  static const String _discordUrl = kDiscordInviteUrl;
-  static const String _githubUrl = 'https://github.com/Spyou/Zangetsu';
-
   final UpdateService _updateService = UpdateService();
   bool _betaUpdates = false;
 
@@ -28,13 +22,6 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
     _updateService.betaOptIn().then((v) {
       if (mounted) setState(() => _betaUpdates = v);
     });
-  }
-
-  Future<void> _open(String url) async {
-    final uri = Uri.parse(url);
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      await launchUrl(uri, mode: LaunchMode.platformDefault);
-    }
   }
 
   void _push(Widget screen) => Navigator.of(
@@ -51,7 +38,8 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
         children: [
           const _ProfileCard(),
           const SizedBox(height: 24),
-          // Contributors — above Social, opens the full list.
+
+          // Contributors
           SettingsCard(
             children: [
               SettingsTile(
@@ -62,36 +50,9 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
               ),
             ],
           ),
-          SettingsSectionLabel(context.l10n.social, muted: true),
-          SettingsCard(
-            children: [
-              SettingsTile(
-                icon: Icons.language_rounded,
-                title: context.l10n.website,
-                subtitle: 'zangetsu.online',
-                onTap: () => _open(_websiteUrl),
-              ),
-              SettingsTile(
-                icon: Icons.send_rounded,
-                title: context.l10n.telegram,
-                subtitle: context.l10n.communityChat,
-                onTap: () => _open(_telegramUrl),
-              ),
-              SettingsTile(
-                icon: Icons.discord,
-                title: context.l10n.discord,
-                subtitle: context.l10n.joinTheServer,
-                onTap: () => _open(_discordUrl),
-              ),
-              SettingsTile(
-                icon: Icons.code_rounded,
-                title: context.l10n.github,
-                subtitle: context.l10n.viewTheSourceCode,
-                onTap: () => _open(_githubUrl),
-              ),
-            ],
-          ),
+
           SettingsSectionLabel(context.l10n.appSection, muted: true),
+
           SettingsCard(
             children: [
               SettingsTile(
@@ -120,12 +81,10 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
                   value: _betaUpdates,
                   activeThumbColor: AppColors.accent,
                   onChanged: (v) async {
-                    // Turning it on: confirm first so it's never a silent opt-in.
                     if (v && !await confirmJoinBeta(context)) return;
                     await _updateService.setBetaOptIn(v);
                     if (!mounted) return;
                     setState(() => _betaUpdates = v);
-                    // Then check right away so a waiting beta shows up.
                     if (v && context.mounted) {
                       maybeShowUpdateDialog(context, manual: true);
                     }
@@ -140,7 +99,9 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
               ),
             ],
           ),
+
           const SizedBox(height: 24),
+
           Center(
             child: Text(
               '© ${DateTime.now().year}  $kAppName',
@@ -202,7 +163,6 @@ class _DeveloperRow extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              // One solid dark grey, matching the app's cards.
               color: AppColors.settingsCard,
               borderRadius: BorderRadius.circular(14),
             ),
